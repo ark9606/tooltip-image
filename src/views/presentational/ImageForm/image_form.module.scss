@@ -1,0 +1,129 @@
+$img-size: 350px;
+
+
+.image_form {
+  min-width: 350px;
+  min-height: 500px;
+  width: 40vmin;
+  height: 40vmin;
+  // background: rgb(199, 199, 199);
+  box-sizing: border-box;
+  padding: 10px;
+
+  // font-size: calc(1em + .5vmin);
+
+}
+
+button.button {
+  // height: 5vmin;
+  width: 100%;
+  margin: 5px;
+  height: 30px;
+  border: none;
+  // padding: 0 5px;
+  border-radius: 5px;
+  background-color: rgb(233, 233, 233);
+  cursor: pointer;
+  color: darkgreen;
+  transition: .2s;
+  &:hover {
+    background-color: rgb(243, 243, 243);
+  }
+
+  &.selected {
+    background-color: green;
+    color: rgb(207, 207, 207);
+  }
+}
+
+.input_image {
+  // margin: 0 auto;
+  position: relative;
+  background-color: rgba(188, 143, 143, 0.7);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  width: 100%;
+  height: $img-size;
+  cursor: pointer;
+  // transition: .3s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+
+  &.input_image_empty::after {
+    content: 'choose image';
+
+  }
+
+  &::after {
+    padding: 2px 10px;
+    border-radius: 15px;
+    content: 'change image';
+    opacity: 0.8;
+    transition: .3s;
+
+    background: white;
+    font-size: 1em;
+  }
+
+  &:hover {
+    &::after {
+      opacity: 1;
+      color: rgb(201, 39, 39);
+
+    }
+
+  }
+
+}
+
+.pointers {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  margin: 5px 0;
+
+  // background: blue;
+}
+
+.footer {
+  display: grid;
+  grid-template-columns: 75% calc(25% - 10px);
+  // justify-content: space-between;
+  width: 100%;
+  margin: 5px 0;
+
+  // background: red;
+}
+
+input[type='text'] {
+  background: transparent;
+  border: none;
+  border-bottom: 2px solid black;
+  margin: 5px;
+  outline: none;
+  box-sizing: border-box;
+  padding: 0 10px;
+}
+
+
+@media only screen and (max-width: 600px) {
+
+  .image_form {
+    width: 100%;
+    min-width: 100%;
+
+  }
+
+  .pointers {
+    button {
+      width: calc(25% - 10px);
+      padding: 0;
+      margin: 0 5px;
+    }
+  }
+
+} 
+

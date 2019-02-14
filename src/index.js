@@ -4,7 +4,32 @@ import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 
-ReactDOM.render(<App />, document.getElementById('root'));
+import { Provider } from "react-redux";
+import { PersistGate } from 'redux-persist/integration/react';
+import { store, persistor } from './state/store';
+
+// disable React Dev Tools
+if(process.env.NODE_ENV === 'production'){
+  if (typeof window.__REACT_DEVTOOLS_GLOBAL_HOOK__ === "object") {
+      for (let [key, value] of Object.entries(window.__REACT_DEVTOOLS_GLOBAL_HOOK__)) {
+          window.__REACT_DEVTOOLS_GLOBAL_HOOK__[key] = typeof value == "function" ? () => {} : null;
+      }
+  }
+}
+
+const wrapper = document.getElementById('root');
+
+if(wrapper) {
+
+  ReactDOM.render( 
+    <Provider store={store}>
+      <PersistGate loading={null} persistor={persistor}>
+        <App store={store}/>
+      </PersistGate>
+    </Provider>,
+  wrapper);
+}
+// ReactDOM.render(<App />, document.getElementById('root'));
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
