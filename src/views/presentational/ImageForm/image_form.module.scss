@@ -1,5 +1,10 @@
 $img-size: 350px;
 
+@mixin flexible () {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
 .image_form {
   min-width: 350px;
@@ -8,7 +13,7 @@ $img-size: 350px;
   height: 40vmin;
   // background: rgb(199, 199, 199);
   box-sizing: border-box;
-  padding: 10px;
+  padding: 10px 0;
 
   // font-size: calc(1em + .5vmin);
 
@@ -22,6 +27,7 @@ button.button {
   border: none;
   // padding: 0 5px;
   border-radius: 5px;
+  border-radius: 1px;
   background-color: rgb(233, 233, 233);
   cursor: pointer;
   color: darkgreen;
@@ -47,10 +53,7 @@ button.button {
   height: $img-size;
   cursor: pointer;
   // transition: .3s;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
+  @include flexible();
 
   &.input_image_empty::after {
     content: 'choose image';

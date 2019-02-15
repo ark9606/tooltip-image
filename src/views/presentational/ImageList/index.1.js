@@ -14,11 +14,11 @@ const Image = ({pointer, tooltip}) => (
       <ImageButton position='left'>Edit</ImageButton>
       <ImageButton position='right'>Delete</ImageButton>
 
-      {/* <div className={`${imgStyles.image_tooltip_container} ${imgStyles[`tooltip_${pointer}`]}`}> */}
-        <div className={imgStyles.image_tooltip + ' ' + imgStyles[`tooltip_${pointer}`]}>
+      <div className={`${imgStyles.image_tooltip_container} ${imgStyles[`tooltip_${pointer}`]}`}>
+        <div className={imgStyles.image_tooltip}>
           {tooltip}
         </div>
-      {/* </div> */}
+      </div>
 
     </div>
   </div>
@@ -38,7 +38,7 @@ export default class App extends Component {
       <Title text='Available images'/>
       <div className={imgStyles.list}>
 
-        <Image key={0} pointer='right' tooltip='111111111111 dfs fd dfs f dsf ds'/>
+        <Image key={0} pointer='right' tooltip='111111111111'/>
         <Image key={0} pointer='right' tooltip='11'/>
         <Image key={1} pointer='left' tooltip='22222'/>
         <Image key={2} pointer='top' tooltip='333333333333'/>
