@@ -44,12 +44,13 @@ button.button {
 
 .input_image {
   // margin: 0 auto;
+  margin: 10px;
   position: relative;
   background-color: rgba(188, 143, 143, 0.7);
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  width: 100%;
+  width: calc(100% - 20px);
   height: $img-size;
   cursor: pointer;
   // transition: .3s;
@@ -85,8 +86,8 @@ button.button {
 .pointers {
   display: flex;
   justify-content: space-between;
-  width: 100%;
-  margin: 5px 0;
+  width: calc(100% - 10px);
+  margin: 5px;
 
   // background: blue;
 }
@@ -95,8 +96,10 @@ button.button {
   display: grid;
   grid-template-columns: 75% calc(25% - 10px);
   // justify-content: space-between;
-  width: 100%;
-  margin: 5px 0;
+  // width: 100%;
+  width: calc(100% - 10px);
+
+  margin: 5px;
 
   // background: red;
 }
