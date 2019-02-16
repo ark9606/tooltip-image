@@ -1,18 +1,16 @@
-import React, {Component} from 'react';
+import React, {PureComponent} from 'react';
 import styles from './image_form.module.scss';
 
-export default class ImageInput extends Component {
+export default class ImageInput extends PureComponent {
   constructor(props) {
     super(props);
-    this.state = {
-      src: ''
-    };
+
     this.imageInput = React.createRef();
     this.fileReader = new FileReader();
   }
 
   componentDidMount() {
-    this.fileReader.onloadend = () => this.setState({src: this.fileReader.result});
+    this.fileReader.onloadend = () => this.props.handleInput('image', this.fileReader.result);
   }
 
   handleClick = (e) => {
@@ -24,15 +22,15 @@ export default class ImageInput extends Component {
     if (file) {
       this.fileReader.readAsDataURL(file);
     } else {
-      this.setState({src: ''});
+      this.props.handleInput('image', '')
     }
   }
 
   render() {
-    const { src } = this.state;
-    const backgroundImage = `url(${src})`;
+    const { image } = this.props;
+    const backgroundImage = `url(${image})`;
 
-    const classes = [styles.input_image, src === '' ? styles.input_image_empty : ''].join(' ');
+    const classes = [styles.input_image, image === '' ? styles.input_image_empty : ''].join(' ');
     return (
       <div  className={classes} 
             onClick={this.handleClick} style={{backgroundImage}}>

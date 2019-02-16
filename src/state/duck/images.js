@@ -1,6 +1,8 @@
+import uuid from 'uuid/v1';
+
 // Actions
 export const types = {
-  SET_SIDEBAR_STATE : 'tooltip-image',
+  INSERT_IMAGE : 'tooltip-image/insert',
 };
 
 const initialState = {};
@@ -9,15 +11,11 @@ const initialState = {};
 const reducer = (state = initialState, action) => {
 
   switch (action.type) {
-    case types.SET_SIDEBAR_STATE:
-      state = {...state, sidebar: action.payload}
+    case types.INSERT_IMAGE:
+      const { id, image } = action.payload;
+      state = {...state, [id]: image}
       break;
-    case types.SET_ADAPTED_SIDEBAR_STATE:
-      state = {...state, adapted_sidebar: action.payload}
-      break;
-    case types.SET_MODE:
-      state = {...state, mode: action.payload}
-      break;
+
     default: {}
 
   }
@@ -27,30 +25,16 @@ const reducer = (state = initialState, action) => {
 export default reducer;
 
 // Action Creators
-export const changeSidebarState = () => {
-  return (dispatch, getState) => {
-    const sidebar = getState().ui.sidebar;
-    const state = sidebar === 'min' ? 'max' : 'min';
-
-    dispatch({type: types.SET_SIDEBAR_STATE, payload: state});
+export const insertImage = (image) => {
+  return (dispatch) => {
+    dispatch({
+      type: types.INSERT_IMAGE,
+      payload: { 
+        image: image, 
+        id: uuid()
+      }
+    });
   }
 }
 
 
-export const changeAdaptedSidebarState = () => {
-  return (dispatch, getState) => {
-    const sidebar = getState().ui.adapted_sidebar;
-    const state = sidebar === 'min' ? 'max' : 'min';
-
-    dispatch({type: types.SET_ADAPTED_SIDEBAR_STATE, payload: state});
-  }
-}
-
-export const changeUIMode = () => {
-  return (dispatch, getState) => {
-    const mode = getState().ui.mode;
-    const state = mode === 'dark' ? '' : 'dark';
-
-    dispatch({type: types.SET_MODE, payload: state});
-  }
-}
