@@ -47,12 +47,12 @@ export default reducer;
 export const insertImage = (image) => {
   return (dispatch) => {
 
-    const newId = uuid();
+
     dispatch({
       type: types.INSERT_IMAGE,
       payload: { 
         image: image, 
-        id: newId
+        id: uuid()
       }
     });
   }

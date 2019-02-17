@@ -5,16 +5,17 @@ $img-size-min: 350px;
 
 
 // $tooltip-clr: yellow;
-$tooltip-clr: rgba(235, 235, 235, 0.95);
+$tooltip-clr: rgba(235, 235, 235, 1);
+$tooltip-border: 1px solid green;
 
 $tooltip-pointer-radius: 50%;
 
-$tooltip-pointer-w: 20px;
-$tooltip-pointer-h: 20px;
+$tooltip-pointer-w: 22px;
+$tooltip-pointer-h: 22px;
 
 @mixin pointerAnimation() {
   &:before {
-    opacity: 0.75;
+    opacity: 1;
   }
 }
 
@@ -103,6 +104,9 @@ $tooltip-pointer-h: 20px;
       box-sizing: border-box;
       transition: .3s;
       cursor: default;
+      
+      // word-wrap: break-all;
+      word-break: break-all;
 
       // Tooltip pointer
       &:before {
@@ -113,6 +117,8 @@ $tooltip-pointer-h: 20px;
         width: $tooltip-pointer-w;
         height: $tooltip-pointer-h;
         transition: .35s;
+        box-sizing: border-box;
+        border: $tooltip-border;
       }
 
 
@@ -120,13 +126,15 @@ $tooltip-pointer-h: 20px;
       &.tooltip_right {
         @include verticalTooltip();
         right: 0;
-
         transform: translateX(100%);
+        border-left: $tooltip-border;
+
         &::before{
           left: 0;
           transform: translateX(-100%);
           border-bottom-left-radius: $tooltip-pointer-radius;
           border-top-left-radius: $tooltip-pointer-radius;
+          border-right-color: transparent;
         }
         &:hover {
           transform: translateX(0);
@@ -139,11 +147,14 @@ $tooltip-pointer-h: 20px;
         @include verticalTooltip();
         left: 0;
         transform: translateX(-100%);
+        border-right: $tooltip-border;
+
         &::before{
           right: 0;
           transform: translateX(100%);
           border-bottom-right-radius: $tooltip-pointer-radius;
           border-top-right-radius: $tooltip-pointer-radius;
+          border-left-color: transparent;
         }
 
         &:hover {
@@ -156,11 +167,14 @@ $tooltip-pointer-h: 20px;
         @include horizintalTooltip();
         top: 0;
         transform: translateY(-100%);
+        border-bottom: $tooltip-border;
+
         &::before{
           bottom: 0;
           transform: translateY(100%);
           border-bottom-right-radius: $tooltip-pointer-radius;
           border-bottom-left-radius: $tooltip-pointer-radius;
+          border-top-color: transparent;
         }
 
         &:hover {
@@ -173,11 +187,14 @@ $tooltip-pointer-h: 20px;
         @include horizintalTooltip();
         bottom: 0;
         transform: translateY(100%);
+        border-top: $tooltip-border;
+
         &::before{
           top: 0;
           transform: translateY(-100%);
           border-top-right-radius: $tooltip-pointer-radius;
           border-top-left-radius: $tooltip-pointer-radius;
+          border-bottom-color: transparent;
         }
         &:hover {
           transform: translateY(0);

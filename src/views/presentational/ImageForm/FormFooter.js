@@ -13,7 +13,7 @@ export default class FormFooter extends PureComponent {
 
     return (
       <footer className={styles.footer}>
-        <input type="text" name="toolrip" onChange={this.handleChange} value={tooltip} placeholder='Tooltip text'/>
+        <input type="text" name="toolrip" onChange={this.handleChange} value={tooltip} maxLength={200} placeholder='Tooltip text'/>
         <Button title='Save' onClick={handleSave}/>
       </footer>
     );
