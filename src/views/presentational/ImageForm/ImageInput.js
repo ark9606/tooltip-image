@@ -22,10 +22,8 @@ export default class ImageInput extends PureComponent {
 
   handleImageChange = (e) => {
     const file = this.imageInput.current.files[0];
-    this.fileSizeMB = file.size / 1024 ** 2;
-    // console.log(fileSizeMB);
-    
     if (file) {
+      this.fileSizeMB = file.size / 1024 ** 2;
       this.fileReader.readAsDataURL(file);
     } else {
       this.props.handleInput('image', '')

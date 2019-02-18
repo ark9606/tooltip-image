@@ -20,14 +20,17 @@ class App extends Component {
       tooltip: '',
       image: '',
       size: '',
+      position: 50,
 
       // Id of selected image to Edit
       id: '',
 
       // Image to View
-      view: null
+      view: null,
+
+      
     }
-    this.state = {...this.initialState};
+    this.state = {maxSize: MAX_SIZE, ...this.initialState};
 
     this.boundActionCreators = bindActionCreators({
       insertImage, editImage, deleteImage
@@ -57,12 +60,14 @@ class App extends Component {
   }
 
   handleSelectImage = (img) => {
-    const { key:id, src:image, tooltip, pointer } = img;
-    this.setState({id, pointer, tooltip, image});
+    const { key:id, src:image, tooltip, pointer, position, size } = img;
+    this.setState({id, pointer, tooltip, image, position, size});
   }
 
   handleSave = (e) => {
-    const { image: src, tooltip, pointer, id, size } = this.state;
+    const { image: src, tooltip, pointer, id, size, maxSize, position } = this.state;
+
+    
     if(src === '') {
       alert('Choose image'); return;
     }
@@ -71,20 +76,22 @@ class App extends Component {
       alert('Enter tooltip'); return;
     }
 
+
     const newSize = this.totalSize + +size.toFixed(2);
-    if( newSize > MAX_SIZE) {
-      alert(`Image too large: ${newSize} > ${MAX_SIZE}Mb`); return;
+    if( newSize > maxSize) {
+      alert(`Image too large: ${newSize} > ${maxSize}Mb`); return;
     }
+
 
     if(id === '') {
       this.boundActionCreators.insertImage({
-        src, tooltip, pointer, size
+        src, tooltip, pointer, size, position
       });
       this.setState({...this.initialState});
     }
     else {
       this.boundActionCreators.editImage({
-        id, src, tooltip, pointer, size
+        id, src, tooltip, pointer, size, position
       });
       this.setState({...this.initialState});
     }
@@ -96,8 +103,8 @@ class App extends Component {
       this.setState({view: null});
       return;
     }
-    const { key:id, src:image, tooltip, pointer } = img;
-    this.setState({view: {id, pointer, tooltip, image}});
+    const { key:id, src:image, tooltip, pointer, position } = img;
+    this.setState({view: {id, pointer, tooltip, image, position}});
   }
 
   render() {

@@ -9,11 +9,12 @@ $img-size: 350px;
 .image_form {
   margin: 0 auto;
   width: 50vmin;
-  &>p {
+  & > p {
     margin: 0 10px;
     font-size: 0.85em;
   }
-  &>div {
+  
+  & > div {
     min-width: 350px;
     min-height: 450px;
     width: 40vmin;
@@ -29,6 +30,27 @@ $img-size: 350px;
 
 }
 
+.settings {
+  display: flex;
+  flex-direction: column;
+}
+.trackbar {
+  margin: 0 auto;
+  width: calc(100% - 20px);
+}
+
+span.text_button {
+  // color: rgb(0, 184, 0);
+  color: rgb(0, 153, 255);
+  cursor: pointer;
+  text-decoration: underline;
+
+  &:hover {
+    text-decoration: underline;
+    color: red;
+
+  }
+}
 button.button {
   // height: 5vmin;
   width: 100%;

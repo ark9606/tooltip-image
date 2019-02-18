@@ -61,8 +61,6 @@ $tooltip-pointer-h: 22px;
 
     max-width: calc(100% - #{$padd} * 2);
     max-height: calc(100% - #{$padd} * 2);
-    // min-width: 40vmin;
-    // min-height: 40vmin;
 
     & > img {
       max-width: 100%;
@@ -120,7 +118,7 @@ $tooltip-pointer-h: 22px;
       // Tooltip pointer
       &:before {
         display: block;
-        content: '';
+        content: attr(data-position);
         position: absolute;
         background: $tooltip-clr;
         width: $tooltip-pointer-w;
@@ -128,6 +126,16 @@ $tooltip-pointer-h: 22px;
         transition: .35s;
         box-sizing: border-box;
         border: $tooltip-border;
+
+        // top: var(attr(data-position));
+        // top: content;
+        // top: calc(attr(data-position) * 1%);
+        // top: calc(10 * 1%);
+        // margin-top: calc(attr(data-position) * 1%);
+        // margin-top: 100px;
+
+
+
       }
 
 
@@ -140,6 +148,7 @@ $tooltip-pointer-h: 22px;
 
         &::before{
           left: 0;
+          top: var(--tooltip-position);
           transform: translateX(-100%);
           border-bottom-left-radius: $tooltip-pointer-radius;
           border-top-left-radius: $tooltip-pointer-radius;
@@ -160,6 +169,7 @@ $tooltip-pointer-h: 22px;
 
         &::before{
           right: 0;
+          top: var(--tooltip-position);
           transform: translateX(100%);
           border-bottom-right-radius: $tooltip-pointer-radius;
           border-top-right-radius: $tooltip-pointer-radius;
@@ -180,6 +190,7 @@ $tooltip-pointer-h: 22px;
 
         &::before{
           bottom: 0;
+          left: var(--tooltip-position);
           transform: translateY(100%);
           border-bottom-right-radius: $tooltip-pointer-radius;
           border-bottom-left-radius: $tooltip-pointer-radius;
@@ -200,6 +211,7 @@ $tooltip-pointer-h: 22px;
 
         &::before{
           top: 0;
+          left: var(--tooltip-position);
           transform: translateY(-100%);
           border-top-right-radius: $tooltip-pointer-radius;
           border-top-left-radius: $tooltip-pointer-radius;

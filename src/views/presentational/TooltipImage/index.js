@@ -13,8 +13,7 @@ const ImageButton = ({position, onClick, children}) => (
 export default class TooltipImage extends PureComponent {
 
   render() {
-    const {pointer, tooltip, image, onClose}= this.props;
-    // console.log(this.props);
+    const {pointer, tooltip, image, position, onClose}= this.props;
     
     return(
       <div className={styles.wrapper}>
@@ -22,9 +21,11 @@ export default class TooltipImage extends PureComponent {
           <img src={image} alt={tooltip}/>
           <ImageButton position='right' onClick={onClose}>Close</ImageButton>
           {
-            tooltip && pointer && <div className={styles.image_tooltip + ' ' + styles[`tooltip_${pointer}`]}>
-              {tooltip}
-            </div>
+            tooltip && pointer && 
+              <div  style={{'--tooltip-position': `${position}%`}}
+                    className={styles.image_tooltip + ' ' + styles[`tooltip_${pointer}`]}>
+                {tooltip}
+              </div>
           }
         </div>
       </div>

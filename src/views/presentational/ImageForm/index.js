@@ -1,5 +1,5 @@
-import React, {Component, PureComponent} from 'react';
-// import PropTypes from 'prop-types';
+import React, {PureComponent} from 'react';
+import PropTypes from 'prop-types';
 
 import styles from './image_form.module.scss';
 import Title from '../Title';
@@ -7,11 +7,22 @@ import ImageInput from './ImageInput';
 import FormFooter from './FormFooter';
 import PointersGrid from './PointersGrid';
 
-import { MAX_SIZE } from '../../../state/duck/images';
-
 
 const FormTitle = () => <Title text='Save image'/>;
 
+const TextButton = ({text, onClick, ...props}) => <span className={styles.text_button} onClick={onClick} {...props}>{text}</span>;
+
+const TrackBar = props => <input type='range' className={styles.trackbar} {...props}/>;
+
+TrackBar.defaultProps = {
+  min: 0,
+  max: 100,
+}
+
+TrackBar.propTypes = {
+  value: PropTypes.number.isRequired,
+  onChange: PropTypes.func.isRequired,
+}
 
 class ImageForm extends PureComponent {
 
@@ -21,14 +32,23 @@ class ImageForm extends PureComponent {
 
   render() {
 
-    const { tooltip, pointer, image, totalSize, handleInput, handleSave, handleImage} = this.props;
+    const { tooltip, pointer, image, totalSize, maxSize, position,
+      handleInput, handleSave, handleImage} = this.props;
 
     return (
       <form className={styles.image_form} onSubmit={this.handleSubmit}>
         <FormTitle />
-        <p>Memory usage: {totalSize} / {MAX_SIZE}Mb (LocalStorage limit)</p>
-        <div>
+        <p>
+          {`Memory: ${totalSize} / ${maxSize} Mb (LocalStorage limit) `}
+          <TextButton text="Maximize limit" onClick={() => handleInput('maxSize', Infinity)} 
+                      title="Saving image isn't guaranteed with unlimited storage"/>
+        </p>
+        <div className={styles.settings}>
           <ImageInput handleInput={handleImage} image={image}/>
+          
+          <TrackBar value={position} 
+                    onChange={(e) => handleInput('position', +e.target.value)}/>
+
           <PointersGrid pointer={pointer} handlePointerChange={handleInput}/>       
           <FormFooter tooltip={tooltip} 
                       handleInput={handleInput}
@@ -40,10 +60,4 @@ class ImageForm extends PureComponent {
   }
 }
 
-
-ImageForm.propTypes = {
-
-};
-
-// export default connect()(ImageForm);
 export default ImageForm;
