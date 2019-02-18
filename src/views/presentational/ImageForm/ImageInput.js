@@ -1,4 +1,6 @@
 import React, {PureComponent} from 'react';
+import Tooltip from '../Tooltip';
+
 import styles from './image_form.module.scss';
 
 export default class ImageInput extends PureComponent {
@@ -31,16 +33,18 @@ export default class ImageInput extends PureComponent {
   }
 
   render() {
-    const { image } = this.props;
+    const { image, handleImage, ...tooltipProps } = this.props;
     const backgroundImage = `url(${image})`;
 
     const classes = [styles.input_image, image === '' ? styles.input_image_empty : ''].join(' ');
     return (
-      <div  className={classes} 
-            onClick={this.handleClick} style={{backgroundImage}}>
-        <input  type='file' ref={this.imageInput} accept="image/*"
-                onChange={this.handleImageChange} hidden/>        
-      </div>
+      <Tooltip {...tooltipProps} classes={[styles.image_container]}>
+        <div  className={classes} 
+              onClick={this.handleClick} style={{backgroundImage}}>
+          <input  type='file' ref={this.imageInput} accept="image/*"
+                  onChange={this.handleImageChange} hidden/>        
+        </div>
+      </Tooltip>
     );
   }
 }

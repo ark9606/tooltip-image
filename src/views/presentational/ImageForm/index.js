@@ -44,7 +44,8 @@ class ImageForm extends PureComponent {
                       title="Saving image isn't guaranteed with unlimited storage"/>
         </p>
         <div className={styles.settings}>
-          <ImageInput handleInput={handleImage} image={image}/>
+          <ImageInput handleInput={handleImage} image={image} 
+                      tooltip={tooltip} pointer={pointer} position={position}/>
           
           <TrackBar value={position} 
                     onChange={(e) => handleInput('position', +e.target.value)}/>

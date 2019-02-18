@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import ImageForm from '../../presentational/ImageForm';
 import ImageList from '../../presentational/ImageList';
-import TooltipImage from '../../presentational/TooltipImage';
+import ImageView from '../../presentational/ImageView';
 
 import {connect} from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -60,12 +60,12 @@ class App extends Component {
   }
 
   handleSelectImage = (img) => {
-    const { key:id, src:image, tooltip, pointer, position, size } = img;
-    this.setState({id, pointer, tooltip, image, position, size});
+    const { key:id, src:image, ...restOptions } = img;
+    this.setState({id, image, restOptions});
   }
 
   handleSave = (e) => {
-    const { image: src, tooltip, pointer, id, size, maxSize, position } = this.state;
+    const { maxSize, image: src, tooltip, pointer, id, size, position } = this.state;
 
     
     if(src === '') {
@@ -103,8 +103,8 @@ class App extends Component {
       this.setState({view: null});
       return;
     }
-    const { key:id, src:image, tooltip, pointer, position } = img;
-    this.setState({view: {id, pointer, tooltip, image, position}});
+    const { key:id, src:image, ...restOptions } = img;
+    this.setState({view: {id, image, ...restOptions}});
   }
 
   render() {
@@ -121,7 +121,7 @@ class App extends Component {
         <ImageList  images={images} deleteImage={deleteImage} 
                     handleView={this.handleViewImage}
                     handleSelect={this.handleSelectImage}  />
-        {view && <TooltipImage {...view} onClose={() => this.handleViewImage(null)}/>}
+        {view && <ImageView {...view} onClose={() => this.handleViewImage(null)}/>}
       </div>
     );
   }
