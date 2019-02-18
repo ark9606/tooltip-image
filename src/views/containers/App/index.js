@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import ImageForm from '../../presentational/ImageForm';
 import ImageList from '../../presentational/ImageList';
-// import ImageList from '../SavedImageList';
+import TooltipImage from '../../presentational/TooltipImage';
+
 import {connect} from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { insertImage, editImage, deleteImage, mapImageObjectToArray, MAX_SIZE } from '../../../state/duck/images';
@@ -22,6 +23,9 @@ class App extends Component {
 
       // Id of selected image to Edit
       id: '',
+
+      // Image to View
+      view: null
     }
     this.state = {...this.initialState};
 
@@ -54,13 +58,7 @@ class App extends Component {
 
   handleSelectImage = (img) => {
     const { key:id, src:image, tooltip, pointer } = img;
-    this.setState({
-      id, 
-      pointer,
-      tooltip,
-      image,
-    });
-
+    this.setState({id, pointer, tooltip, image});
   }
 
   handleSave = (e) => {
@@ -93,10 +91,19 @@ class App extends Component {
 
   }
 
+  handleViewImage = (img) => {
+    if(!img) {
+      this.setState({view: null});
+      return;
+    }
+    const { key:id, src:image, tooltip, pointer } = img;
+    this.setState({view: {id, pointer, tooltip, image}});
+  }
+
   render() {
     const { images } = this.props;
     const { deleteImage } = this.boundActionCreators;
-    const { id, ...restState } = this.state;
+    const { id, view, ...restState } = this.state;
     
     return (
       <div className="App">
@@ -104,14 +111,14 @@ class App extends Component {
                     handleImage={this.handleImageChange} 
                     handleInput={this.handleStateChange} 
                     handleSave={this.handleSave}/>
-        <ImageList  images={images} deleteImage={deleteImage} handleSelect={this.handleSelectImage}  />
+        <ImageList  images={images} deleteImage={deleteImage} 
+                    handleView={this.handleViewImage}
+                    handleSelect={this.handleSelectImage}  />
+        {view && <TooltipImage {...view} onClose={() => this.handleViewImage(null)}/>}
       </div>
     );
   }
 }
-
-// alert(1024 * 1024 * 5 - unescape(encodeURIComponent(JSON.stringify(localStorage))).length);
-// var _lsTotal=0,_xLen,_x;for(_x in localStorage){ if(!localStorage.hasOwnProperty(_x)){continue;} _xLen= ((localStorage[_x].length + _x.length)* 2);_lsTotal+=_xLen; console.log(_x.substr(0,50)+" = "+ (_xLen/1024).toFixed(2)+" KB")};console.log("Total = " + (_lsTotal / 1024).toFixed(2) + " KB");
 
 const mapStateToProps = ({images}) => ({images: mapImageObjectToArray(images)});
 

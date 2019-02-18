@@ -46,162 +46,67 @@ $tooltip-pointer-h: 22px;
 
 
 .image_wrapper {
-  // width: $img-size;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
   height: $img-size;
   min-height: $img-size-min;
   background: white;
   // background: red;
   padding: $padd;
   box-sizing: border-box;
+  overflow: hidden;
+  position: relative;
 
+
+  // Buttons: Top Left, Top Right, Center
+  .button {
+    position: absolute;
+    top: $padd;
+    height: 20px;
+    width: 60px;
+    background: rgb(238, 238, 238);
+    border: none;
+    cursor: pointer;
+    opacity: 0.5;
+    transition: .3s;
+
+    &[data-pos='left']{
+      left: $padd;
+      border-bottom-right-radius: 8px;
+    }
+
+    &[data-pos='right']{
+      right: $padd;
+      border-bottom-left-radius: 8px;
+    }
+
+    &[data-pos='center']{
+      left: calc(50% - 30px);
+      top: calc(50% - 10px);
+      border-radius: 15px;
+    }
+
+    &:hover {
+      opacity: 1;
+    }
+  }
 
   // Image itself
   .image_inner {
-    width: 100%;
-    height: 100%;
-    // background: blue;
+    position: absolute;
+    width: calc(100% - #{$padd} * 2);
+    height: calc(100% - #{$padd} * 2);
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
-    position: relative;
-    overflow: hidden;
+    transition: .3s;
+    opacity: 0.9;
+  }
 
-    // Remove & Edit button
-    .button {
-      position: absolute;
-      top: 0;
-      height: 20px;
-      width: 60px;
-      background: rgb(238, 238, 238);
-      border: none;
-      cursor: pointer;
-      opacity: 0.5;
-      transition: .3s;
-
-      &[data-pos='left']{
-        border-bottom-right-radius: 5px;
-      }
-
-      &[data-pos='right']{
-        right: 0;
-        border-bottom-left-radius: 5px;
-      }
-
-      &:hover {
-        opacity: 1;
-      }
-    }
-
-
-    // Tooltip
-    .image_tooltip {
-      position: absolute;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      background: $tooltip-clr;
-      padding: 10px;
-      box-sizing: border-box;
-      transition: .3s;
-      cursor: default;
-      
-      // word-wrap: break-all;
-      word-break: break-all;
-
-      // Tooltip pointer
-      &:before {
-        display: block;
-        content: '';
-        position: absolute;
-        background: $tooltip-clr;
-        width: $tooltip-pointer-w;
-        height: $tooltip-pointer-h;
-        transition: .35s;
-        box-sizing: border-box;
-        border: $tooltip-border;
-      }
-
-
-
-      &.tooltip_right {
-        @include verticalTooltip();
-        right: 0;
-        transform: translateX(100%);
-        border-left: $tooltip-border;
-
-        &::before{
-          left: 0;
-          transform: translateX(-100%);
-          border-bottom-left-radius: $tooltip-pointer-radius;
-          border-top-left-radius: $tooltip-pointer-radius;
-          border-right-color: transparent;
-        }
-        &:hover {
-          transform: translateX(0);
-          @include pointerAnimation();
-        }
-      }
-
-
-      &.tooltip_left{
-        @include verticalTooltip();
-        left: 0;
-        transform: translateX(-100%);
-        border-right: $tooltip-border;
-
-        &::before{
-          right: 0;
-          transform: translateX(100%);
-          border-bottom-right-radius: $tooltip-pointer-radius;
-          border-top-right-radius: $tooltip-pointer-radius;
-          border-left-color: transparent;
-        }
-
-        &:hover {
-          transform: translateX(0);
-          @include pointerAnimation();
-        }
-      }
-
-      &.tooltip_top{
-        @include horizintalTooltip();
-        top: 0;
-        transform: translateY(-100%);
-        border-bottom: $tooltip-border;
-
-        &::before{
-          bottom: 0;
-          transform: translateY(100%);
-          border-bottom-right-radius: $tooltip-pointer-radius;
-          border-bottom-left-radius: $tooltip-pointer-radius;
-          border-top-color: transparent;
-        }
-
-        &:hover {
-          transform: translateY(0);
-          @include pointerAnimation();
-        }
-      }
-
-      &.tooltip_bottom {
-        @include horizintalTooltip();
-        bottom: 0;
-        transform: translateY(100%);
-        border-top: $tooltip-border;
-
-        &::before{
-          top: 0;
-          transform: translateY(-100%);
-          border-top-right-radius: $tooltip-pointer-radius;
-          border-top-left-radius: $tooltip-pointer-radius;
-          border-bottom-color: transparent;
-        }
-        &:hover {
-          transform: translateY(0);
-          @include pointerAnimation();
-        }
-      }
-    }
+  &:hover .image_inner {
+    opacity: 1;
   }
 
 }
