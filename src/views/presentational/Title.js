@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {PureComponent} from 'react';
 
 const style = {
   // textAlign: 'start',
@@ -6,4 +6,9 @@ const style = {
   margin: '10px'
 }
 
-export default ({text}) => <h2 style={style}>{text}</h2>;
+export default class Title extends PureComponent {
+  render() {
+
+    return (<h2 style={style}>{this.props.text}</h2>);
+  }
+}
