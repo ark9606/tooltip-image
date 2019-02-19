@@ -35,13 +35,15 @@ class ImageForm extends PureComponent {
     const { tooltip, pointer, image, totalSize, maxSize, position,
       handleInput, handleSave, handleImage} = this.props;
 
+    const limitMsg = `Memory: ${totalSize} / ${maxSize} ${ maxSize !== Infinity ? 'Mb (LocalStorage limit) ' : ''}`;
+
     return (
       <form className={styles.image_form} onSubmit={this.handleSubmit}>
         <FormTitle />
         <p>
-          {`Memory: ${totalSize} / ${maxSize} Mb (LocalStorage limit) `}
-          <TextButton text="Maximize limit" onClick={() => handleInput('maxSize', Infinity)} 
-                      title="Saving image isn't guaranteed with unlimited storage"/>
+          {limitMsg}
+          {maxSize !== Infinity && <TextButton text="Maximize limit" onClick={() => handleInput('maxSize', Infinity)} 
+                      title="Saving image isn't guaranteed with unlimited storage"/>}
         </p>
         <div className={styles.settings}>
           <ImageInput handleInput={handleImage} image={image} 
