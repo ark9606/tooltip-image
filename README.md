@@ -7,3 +7,12 @@ To select the desirable tooltip pointer position you should use "Top", "Left", "
 
 Project uses LocalStorage. 
 Because of different storage limits of browsers, there is default limit of 4Mb, which can be removed by pressing "Maximize limit" button. Saving image isn't guaranteed with unlimited storage. Because it depends on own LocalStorage limit.
+
+
+Estimate time: 24h  
+Used technologies
+- React
+- Redux
+- SASS
+- Flex-box
+- Local Storage
