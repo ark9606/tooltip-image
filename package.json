@@ -2,7 +2,7 @@
   "name": "tooltip-image",
   "version": "0.1.0",
   "private": false,
-  "homepage": "http://ark9606.github.io/tooltip-image",
+  "homepage": "http://ark9606.github.io/tooltip-image/",
   "dependencies": {
     "node-sass": "^4.11.0",
     "react": "^16.8.1",
