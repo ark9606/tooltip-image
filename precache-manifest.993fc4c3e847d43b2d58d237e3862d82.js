@@ -4,19 +4,19 @@ self.__precacheManifest = [
     "url": "/tooltip-image/static/js/runtime~main.1b453d2f.js"
   },
   {
-    "revision": "9b0a8414b9bdec323d43",
-    "url": "/tooltip-image/static/js/main.9b0a8414.chunk.js"
+    "revision": "923882344d18259bfe11",
+    "url": "/tooltip-image/static/js/main.92388234.chunk.js"
   },
   {
     "revision": "9f8409b9c3b052a21493",
     "url": "/tooltip-image/static/js/2.9f8409b9.chunk.js"
   },
   {
-    "revision": "9b0a8414b9bdec323d43",
-    "url": "/tooltip-image/static/css/main.9d107565.chunk.css"
+    "revision": "923882344d18259bfe11",
+    "url": "/tooltip-image/static/css/main.785f5d9f.chunk.css"
   },
   {
-    "revision": "a2dccbd66bc11194fefb194e4800162e",
+    "revision": "c88edf7d426c6e85b5dc1479701fd772",
     "url": "/tooltip-image/index.html"
   }
 ];
