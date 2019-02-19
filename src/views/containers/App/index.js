@@ -61,7 +61,7 @@ class App extends Component {
 
   handleSelectImage = (img) => {
     const { key:id, src:image, ...restOptions } = img;
-    this.setState({id, image, restOptions});
+    this.setState({id, image, ...restOptions});
   }
 
   handleSave = (e) => {

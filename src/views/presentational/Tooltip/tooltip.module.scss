@@ -5,8 +5,9 @@ $tooltip-border: 1px solid green;
 
 $tooltip-pointer-radius: 50%;
 
-$tooltip-pointer-w: 22px;
-$tooltip-pointer-h: 22px;
+$tooltip-pointer-s: 22px;
+$tooltip-pointer-w: $tooltip-pointer-s;
+$tooltip-pointer-h: $tooltip-pointer-s;
 
 @mixin pointerAnimation() {
   &:before {
@@ -28,6 +29,15 @@ $tooltip-pointer-h: 22px;
   right: 0;
 }
 
+
+// @function getPointerPosition($val) {
+//   $newPos: calc(#{$val} - #{$tooltip-pointer-s} / 2);
+//   @return $newPos;
+// }
+
+@function getPointerPosition($val) {
+  @return calc(#{$val} - #{$tooltip-pointer-s} / 2);
+}
 
 // Image container
 .container {
@@ -52,7 +62,7 @@ $tooltip-pointer-h: 22px;
     // Tooltip pointer
     &:before {
       display: block;
-      content: attr(data-position);
+      content: '';
       position: absolute;
       background: $tooltip-clr;
       width: $tooltip-pointer-w;
@@ -82,7 +92,7 @@ $tooltip-pointer-h: 22px;
 
       &::before{
         left: 0;
-        top: var(--tooltip-position);
+        top: getPointerPosition(var(--tooltip-position));
         transform: translateX(-100%);
         border-bottom-left-radius: $tooltip-pointer-radius;
         border-top-left-radius: $tooltip-pointer-radius;
@@ -103,7 +113,7 @@ $tooltip-pointer-h: 22px;
 
       &::before{
         right: 0;
-        top: var(--tooltip-position);
+        top: getPointerPosition(var(--tooltip-position));
         transform: translateX(100%);
         border-bottom-right-radius: $tooltip-pointer-radius;
         border-top-right-radius: $tooltip-pointer-radius;
@@ -124,7 +134,7 @@ $tooltip-pointer-h: 22px;
 
       &::before{
         bottom: 0;
-        left: var(--tooltip-position);
+        left: getPointerPosition(var(--tooltip-position));
         transform: translateY(100%);
         border-bottom-right-radius: $tooltip-pointer-radius;
         border-bottom-left-radius: $tooltip-pointer-radius;
@@ -145,7 +155,8 @@ $tooltip-pointer-h: 22px;
 
       &::before{
         top: 0;
-        left: var(--tooltip-position);
+        
+        left: getPointerPosition(var(--tooltip-position));
         transform: translateY(-100%);
         border-top-right-radius: $tooltip-pointer-radius;
         border-top-left-radius: $tooltip-pointer-radius;
